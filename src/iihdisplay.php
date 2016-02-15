@@ -85,10 +85,10 @@ function GetAccountDetails($CompanyTag)
 <html>
 <head>
     <title>IIH Order</title>
-    <link rel="stylesheet" href="../scripts/slickgrid/slick.grid.css" type="text/css"/>
-    <link rel="stylesheet" href="../scripts/slickgrid/controls/slick.pager.css" type="text/css"/>
-    <link rel="stylesheet" href="../scripts/slickgrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
-      <link rel="stylesheet" href="../scripts/slickgrid/controls/slick.columnpicker.css" type="text/css"/>
+    <link rel="stylesheet" href="../vendor/mleibman/SlickGrid/slick.grid.css" type="text/css"/>
+    <link rel="stylesheet" href="../vendor/mleibman/SlickGrid/controls/slick.pager.css" type="text/css"/>
+    <link rel="stylesheet" href="../vendor/mleibman/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+      <link rel="stylesheet" href="../vendor/mleibman/SlickGrid/controls/slick.columnpicker.css" type="text/css"/>
   
   <link rel="stylesheet" href="order.css" type="text/css"/>
     <style>
@@ -199,20 +199,20 @@ function GetAccountDetails($CompanyTag)
 
 
 
-<script src="../scripts/slickgrid/lib/firebugx.js"></script>
+<script src="../vendor/mleibman/SlickGrid/lib/firebugx.js"></script>
 
-<script src="../scripts/slickgrid/lib/jquery-1.7.min.js"></script>
-<script src="../scripts/slickgrid/lib/jquery-ui-1.8.16.custom.min.js"></script>
-<script src="../scripts/slickgrid/lib/jquery.event.drag-2.2.js"></script>
+<script src="../vendor/mleibman/SlickGrid/lib/jquery-1.7.min.js"></script>
+<script src="../vendor/mleibman/SlickGrid/lib/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="../vendor/mleibman/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
 
-<script src="../scripts/slickgrid/slick.core.js"></script>
-<script src="../scripts/slickgrid/slick.formatters.js"></script>
-<script src="../scripts/slickgrid/slick.editors.js"></script>
-<script src="../scripts/slickgrid/plugins/slick.rowselectionmodel.js"></script>
-<script src="../scripts/slickgrid/slick.grid.js"></script>
-<script src="../scripts/slickgrid/slick.dataview.js"></script>
-<script src="../scripts/slickgrid/controls/slick.pager.js"></script>
-<script src="../scripts/slickgrid/controls/slick.columnpicker.js"></script>
+<script src="../vendor/mleibman/SlickGrid/slick.core.js"></script>
+<script src="../vendor/mleibman/SlickGrid/slick.formatters.js"></script>
+<script src="../vendor/mleibman/SlickGrid/slick.editors.js"></script>
+<script src="../vendor/mleibman/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
+<script src="../vendor/mleibman/SlickGrid/slick.grid.js"></script>
+<script src="../vendor/mleibman/SlickGrid/slick.dataview.js"></script>
+<script src="../vendor/mleibman/SlickGrid/controls/slick.pager.js"></script>
+<script src="../vendor/mleibman/SlickGrid/controls/slick.columnpicker.js"></script>
 
 <script>
 

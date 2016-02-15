@@ -1,0 +1,21 @@
+{
+  "repositories": 
+    {
+      "slickgrid": {
+        "type": "package",
+        "package": {
+          "name": "mleibman/SlickGrid",
+          "version": "2.1.0",
+          "source": {
+            "type": "git",
+            "url": "https://github.com/mleibman/SlickGrid.git",
+            "reference": "master"
+          }
+        }
+      }
+    }
+  ,
+  "require": {
+    "mleibman/SlickGrid": "2.1.0"
+  }
+}

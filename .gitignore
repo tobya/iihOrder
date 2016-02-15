@@ -4,6 +4,9 @@ src/*data.txt
 *.7z
 iihSettings.json
 
+#composer
+composer.lock
+vendor/
 
 # Windows image file caches
 Thumbs.db
