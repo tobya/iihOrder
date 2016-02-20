@@ -16,6 +16,7 @@
     }
   ,
   "require": {
-    "mleibman/SlickGrid": "2.1.0"
+    "mleibman/SlickGrid": "2.1.0",
+    "tobya/pprint_r": "1.1"
   }
 }
