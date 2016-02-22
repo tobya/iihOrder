@@ -48,6 +48,7 @@ if ($CurrentOrderData == false)
   $CurrentOrderData = '{}';
 } 
 
+/*Retrieve items from HTML Scrap file.*/
 function GetIIHItems(){
 
   $iihDataTextFile = 'iihitems.data.txt';
@@ -74,17 +75,6 @@ function GetAccountDetails($CompanyTag)
 	}
 }
 		
-	
-	
-
-
-
-
-
-
-
-
-
 ?>
 
 <html>
@@ -209,11 +199,9 @@ function GetAccountDetails($CompanyTag)
 
 
 <script src="../vendor/mleibman/SlickGrid/lib/firebugx.js"></script>
-
 <script src="../vendor/mleibman/SlickGrid/lib/jquery-1.7.min.js"></script>
 <script src="../vendor/mleibman/SlickGrid/lib/jquery-ui-1.8.16.custom.min.js"></script>
 <script src="../vendor/mleibman/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
-
 <script src="../vendor/mleibman/SlickGrid/slick.core.js"></script>
 <script src="../vendor/mleibman/SlickGrid/slick.formatters.js"></script>
 <script src="../vendor/mleibman/SlickGrid/slick.editors.js"></script>
@@ -224,6 +212,7 @@ function GetAccountDetails($CompanyTag)
 <script src="../vendor/mleibman/SlickGrid/controls/slick.columnpicker.js"></script>
 
 <script>
+
 
  Date.prototype.yyyymmdd = function() {
    var yyyy = this.getFullYear().toString();
@@ -261,7 +250,7 @@ var sortdir = 1;
 var percentCompleteThreshold = 0;
 var searchString = "";
 var showOrder = false;
-var BCS = {};
+var IIH = {};
 
 function requiredFieldValidator(value) {
     if (value == null || value == undefined || !value.length) {
@@ -371,14 +360,14 @@ $(".grid-header .ui-icon")
       $('#alertbox').fadeOut().html('Account info updated').fadeIn().delay(2000).fadeOut('slow');
         $('#EmailOutput').val( data );
     })
-    BCS.AccountInfo = Items;
+    IIH.AccountInfo = Items;
   })
 
-     BCS.AccountInfo = <?php echo json_encode($Account); ?>
+     IIH.AccountInfo = <?php echo json_encode($Account); ?>
 
- $('#AccountID').val(BCS.AccountInfo.AccountID);
- $('#CustomerID').val(BCS.AccountInfo.CustomerID);
- $('#CustomerSignature').val(BCS.AccountInfo.CustomerSignature);
+ $('#AccountID').val(IIH.AccountInfo.AccountID);
+ $('#CustomerID').val(IIH.AccountInfo.CustomerID);
+ $('#CustomerSignature').val(IIH.AccountInfo.CustomerSignature);
 
 
 
@@ -401,7 +390,7 @@ $(function () {
     var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
     var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 	
-    BCS.orderType = '<?php echo $CurrentOrder['Type']; ?>';
+    IIH.orderType = '<?php echo $CurrentOrder['Type']; ?>';
     // move the filter panel defined in a hidden div into grid top panel
     $("#inlineFilterPanel")
         .appendTo(grid.getTopPanel())
@@ -422,22 +411,22 @@ $(function () {
             }
 
         }
-        $.post('postdata.php',{'action':'GenerateMail','items':Items , 'AccountInfo': BCS.AccountInfo},function(data){
+        $.post('postdata.php',{'action':'GenerateMail','items':Items , 'AccountInfo': IIH.AccountInfo},function(data){
            // alert(data);
             $('#EmailOutput').val( data );
         })
     })
     
-    BCS.SaveOrder = function(e){
+    IIH.SaveOrder = function(e){
         var i ;
         var List = '';
         var Items = [];
        
 
       /*  //If this is a historic order, Saving should create a new order
-        if (BCS.orderType == 'old'         ){
-          BCS.NewOrder(e);
-          BCS.orderType = 'current';
+        if (IIH.orderType == 'old'         ){
+          IIH.NewOrder(e);
+          IIH.orderType = 'current';
 
         }
 */        //console.log(data);
@@ -456,7 +445,7 @@ $(function () {
         //console.log(Items);
         $.ajax({type: 'POST',
               url : 'postdata.php',
-              data: {'action':'SaveOrder','items':Items, 'AccountInfo': BCS.AccountInfo
+              data: {'action':'SaveOrder','items':Items, 'AccountInfo': IIH.AccountInfo
               /*,'debug': true*/},
               async : true,
               success: function(data){
@@ -467,7 +456,7 @@ $(function () {
         }})
     }
 
-    BCS.NewOrder = function(e){
+    IIH.NewOrder = function(e){
       var i ;
       var List = '';
       var Items = [];
@@ -481,7 +470,7 @@ $(function () {
 
       }
       $.post('postdata.php',{ 'action':'NewOrder','items':Items ,
-                              'AccountInfo': BCS.AccountInfo},function(data){
+                              'AccountInfo': IIH.AccountInfo},function(data){
        // alert('New Order Created:' + data);
         $('#alertbox').fadeOut().html('New Order Created: ' + data ).fadeIn().delay(2000).fadeOut('slow');
       })
@@ -495,9 +484,9 @@ $(function () {
 
     }
     
-    $("#btnSaveOrder").click(BCS.SaveOrder);
+    $("#btnSaveOrder").click(IIH.SaveOrder);
     
-    $("#btnNewOrder").click(BCS.NewOrder);
+    $("#btnNewOrder").click(IIH.NewOrder);
 
     $("#btnShowOrder").click(function(e){
         Slick.GlobalEditorLock.cancelCurrentEdit();
@@ -554,7 +543,7 @@ $(function () {
 
     grid.onCellChange.subscribe(function (e, args) {
         dataView.updateItem(args.item.id, args.item);
-        	BCS.SaveOrder();
+        	IIH.SaveOrder();
     });
 
 
@@ -727,7 +716,7 @@ $(function () {
 		//Save every 2 minutes if changed to prevent dataloss
 		window.setInterval(function() {
 						
-						BCS.SaveOrder();
+						IIH.SaveOrder();
 						    	
 		}, 180000);
 
