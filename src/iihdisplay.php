@@ -4,6 +4,7 @@
  */
 
 date_default_timezone_set('Europe/London');
+
 //Very large response so zip return
 ob_start('ob_gzhandler');
 include('config.php');
@@ -53,7 +54,7 @@ function GetIIHItems(){
 
   if (file_exists($iihDataTextFile)){
     $html = file_get_contents($iihDataTextFile);
-   }
+   } 
    return $html;
   
 }
@@ -180,6 +181,10 @@ function GetAccountDetails($CompanyTag)
     <li><B>New Blank Order</B>: Current order stays until you click this button.  </li>
     <li><B>Generate Email</B>: Generate Email into the Text Box below the list, that can be copied and pasted into your favourite email application. </li>
     </ul>
+    <BR>
+    <Strong>Load Items</Strong>
+    <ul><li>To initially load items you must create a data.txt file and load items before the software will run.  Please see <a href='help.html'> help </a> for more details 
+    </li></ul>
     </div>
 
 </div>
