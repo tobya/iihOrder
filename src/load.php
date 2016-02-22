@@ -7,9 +7,9 @@ include('config.php');
     exit;
   }
 
+  //Load and Split data file into an array of lines.
   $Data = explode("\n", file_get_contents('data.txt'));
-//print_R($Data);
-//exit;
+
 
     echo "Loading Data.txt file  \n<BR>";
     echo "Deleting Previous Items file... \n<BR>";
@@ -25,6 +25,7 @@ include('config.php');
     foreach ($Data as $line)
     {
 
+      //Store details of load
       if ($FirstLine){
 
         SaveSetting('LastDataUpdate', array('Title' => $line, 'timestamp' => date('Ymd H:i')));
@@ -45,12 +46,13 @@ include('config.php');
               echo "\n<BR>LOAD LINE: $line";
 
         }
-        else {
+        else  //If not code is found just store line as header, often goes through multiple ignored lines before loading items again. 
+              //Most recent header is used.
+        {
            
             echo "\n<BR>IGNORE LINE: " . $line . '<BR>';
            
             $Header = str_replace("'",' ' ,$line);
-            $result = "";
         }
 
     }
@@ -68,7 +70,8 @@ include('config.php');
 
 
 
-
+/*This function takes the items extracted from the data.txt file and writes them out as javascript.
+This Javascript is then saved as a html scrap which is loaded into the main application.*/
 function SaveIIHItems($Items){
 
   $iihDataTextFile = 'iihitems.data.txt';
@@ -76,30 +79,27 @@ function SaveIIHItems($Items){
   if (file_exists($iihDataTextFile)){
     $html = file_get_contents($iihDataTextFile);
   } else {
+      $html = '';
+      $r = 0;
+      foreach ($Items as $item){
+              $r++;
+            // $html .= "//$r \n";
 
-
-
- 
-        $html = '';
-        $r = 0;
-        foreach ($Items as $item){
-                $r++;
-              // $html .= "//$r \n";
-            //Create Javascript Objects
+//Create Javascript Objects. Avoid Unnecessary white space.
 $html .= 'd =  {}; d.id = ' . $item['AutoItemID'] . ';
 d.Code = "' . $item['Code'] . '";
 d.Description = "' . addslashes(trim($item['Description'])) . '";
 d.Quantity = 0;
 d.Section = "' . addslashes(trim($item['Section'])) . '";
 data.push(d);';
+
             $html .=  "\n";
         }
 
         file_put_contents($iihDataTextFile, $html);
 
       }
-        return $html;
+    return $html;
   
 }
 
-?>
