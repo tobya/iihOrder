@@ -11,8 +11,12 @@ include('config.php');
 //print_R($Data);
 //exit;
 
+    echo "Loading Data.txt file  \n<BR>";
+    echo "Deleting Previous Items file... \n<BR>";
 		//remove cached data file.
 		unlink('iihitems.data.txt');
+
+
 
     $Statements = array();
 
@@ -23,7 +27,7 @@ include('config.php');
 
       if ($FirstLine){
 
-        SaveSetting('LastDataUpdate', json_encode(array('Title' => $line, 'timestamp' => date('Ymd H:i'))));
+        SaveSetting('LastDataUpdate', array('Title' => $line, 'timestamp' => date('Ymd H:i')));
         $FirstLine = false;
       }
 
@@ -37,10 +41,14 @@ include('config.php');
 
            
               $ItemArray[] = array('Code' => $regs[1], 'Description' => $Desc, 'Section' => $Header, 'AutoItemID' => $AutoItemID);
+             
+              echo "\n<BR>LOAD LINE: $line";
 
         }
         else {
-            echo $line . '<BR>';
+           
+            echo "\n<BR>IGNORE LINE: " . $line . '<BR>';
+           
             $Header = str_replace("'",' ' ,$line);
             $result = "";
         }
@@ -49,6 +57,7 @@ include('config.php');
 
     SaveIIHItems($ItemArray);
 
+    echo "FINISHED.";
 // print_R($Statements);
 
 //exit;

@@ -61,13 +61,17 @@ function GetIIHItems(){
 
 function GetAccountDetails($CompanyTag)
 {
-	if ($Setting = GetSetting('IIH_ACCOUNTDETAILS_' .  $CompanyTag ))
+   $Setting = GetSetting('IIH_ACCOUNTDETAILS_' .  $CompanyTag );
+   
+	if (is_array($Setting))
 	{
-		return $Setting;}
-		else
-		{
-		return  "{'AccountID':'','CustomerID': ''}";
-		}
+    return $Setting;
+  }
+    else
+  {
+    
+		return  array('AccountID'=>'X','CustomerID'=> 'X');
+	}
 }
 		
 	
@@ -183,7 +187,7 @@ function GetAccountDetails($CompanyTag)
     </ul>
     <BR>
     <Strong>Load Items</Strong>
-    <ul><li>To initially load items you must create a data.txt file and load items before the software will run.  Please see <a href='help.html'> help </a> for more details 
+    <ul><li>To initially load items you must create a data.txt file and load items before the software will run.  Please see <a href='loadhelp.php'> help </a> for more details 
     </li></ul>
     </div>
 

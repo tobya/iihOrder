@@ -2,7 +2,9 @@
 scripts/
 src/*data.txt
 *.7z
-iihSettings.json
+iihSettings.json*
+
+
 
 #composer
 composer.lock
