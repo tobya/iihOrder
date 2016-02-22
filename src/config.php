@@ -23,6 +23,7 @@ function SaveSetting($KeyName, $Value)
 
       $Settings[$KeyName] = $Value;
       
+      //Create file with php extension so cant be loaded from webside.
       file_put_contents('iihSettings.json.php', json_encode($Settings));
       return $Settings;
 
