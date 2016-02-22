@@ -198,7 +198,7 @@ function GetAccountDetails($CompanyTag)
 
 
 
-<script src="../vendor/mleibman/SlickGrid/lib/firebugx.js"></script>
+
 <script src="../vendor/mleibman/SlickGrid/lib/jquery-1.7.min.js"></script>
 <script src="../vendor/mleibman/SlickGrid/lib/jquery-ui-1.8.16.custom.min.js"></script>
 <script src="../vendor/mleibman/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
@@ -311,7 +311,8 @@ function gridSearchFilter(item, args) {
         }
     }
     
-    //If all search words have been matched then return true.
+    //If all search words have been matched then send back true.
+
     return true;
 }
 
