@@ -261,51 +261,57 @@ function requiredFieldValidator(value) {
     }
 }
 
-function myFilter(item, args) {
 
+/*Custom Filter for Grid
+Called for every single item.  
+Function returns true to include, false to hide.*/
+function gridSearchFilter(item, args) {
+
+    //If we are only showing the current order then only show item if quantity > 1
     if (args.showOrder){
-    if (parseInt(item["Quantity"],10) < 1){
-     return false;
+      if (parseInt(item["Quantity"],10) < 1){
+        return false;
+      }
     }
-    }
-
-
 
 
     //Search values must have values and must be lowercase for comparison.
+    //Search code and section also
     var lowercaseitem = item["Description"] + item['Section'] + item['Code'];
-       if (lowercaseitem != undefined){
+       
+    if (lowercaseitem != undefined){
            lowercaseitem = lowercaseitem.toLowerCase();
-       }
-    else
-       {
+    }
+    else{
            return false;
-       }
+    }
 
+    //Get search string as lowercase also
     var s = args.searchString;
+
     if (s != undefined){
        s = s.toLowerCase();
     }
-    else
-    {
+    else {
         return false;
     }
 
 
-    //Split String
+    //Split String so we can search for each word seperately
     var SearchItems = args.searchString.split(" ");
    var i;
    
      for (i = 0;i< SearchItems.length;i++){
-      s = SearchItems[i].toLowerCase();
-    	//Compare Search String
-      if (args.searchString != "" && lowercaseitem.indexOf(s) == -1) {
-        return false;
-      }
+        
+        s = SearchItems[i].toLowerCase();
+      	
+        //Compare Search String
+        if (args.searchString != "" && lowercaseitem.indexOf(s) == -1) {
+          return false;
+        }
     }
     
-    
-
+    //If all search words have been matched then return true.
     return true;
 }
 
@@ -325,15 +331,19 @@ function toggleSearchRow() {
 }
 
 var iih ={};
+
 iih.CountOfItems = function(dataitems){
-  var count = 0;
-  $.each(dataitems, function(key,item){
-    if (parseInt(item["Quantity"],10) > 0){
-      count++;
-    }
-  });
-  return count;
-};
+                          var count = 0;
+                          $.each(dataitems, function(key,item){
+                              
+                              if (parseInt(item["Quantity"],10) > 0){
+                                count++;
+                              }
+                            
+                            }
+                          );
+                          return count;
+                        };
 
 
 
@@ -423,13 +433,6 @@ $(function () {
         var Items = [];
        
 
-      /*  //If this is a historic order, Saving should create a new order
-        if (IIH.orderType == 'old'         ){
-          IIH.NewOrder(e);
-          IIH.orderType = 'current';
-
-        }
-*/        //console.log(data);
 
         for (i = 0; i < data.length ; i++)
         {
@@ -698,7 +701,7 @@ $(function () {
         searchString: searchString,
         showOrder: showOrder
     });
-    dataView.setFilter(myFilter);
+    dataView.setFilter(gridSearchFilter);
     dataView.endUpdate();
 
    //Show Search Panel on Load.
