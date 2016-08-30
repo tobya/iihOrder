@@ -1,11 +1,29 @@
 <?php
 include('config.php');
 
+  if (isset($_POST['PastedData'])){
+    file_put_contents('data.txt', $_POST['PastedData']);
+  }
  
   if (!file_exists('data.txt')){
-    echo '<h2>Data.txt does not exist</h2><P>Please copy data from iih pdf to create data.txt file </p>';
+
+
+    echo '<h2>Data.txt does not exist</h2><P>Please copy data from iih pdf to create data.txt file </p>
+
+
+    ';
     exit;
   }
+
+  ?>
+
+    <form method=post action="load.php">
+    Paste Copied Items here and click save to create or overwrite data.txt
+    <textarea rows=25 cols=300 name=PastedData></textarea>
+    <input type=submit value="Create Data.txt">
+    </form>
+    <a href="iihdisplay.php"> Back to IIH Grid</a>
+  <?php
 
   //Load and Split data file into an array of lines.
   $Data = explode("\n", file_get_contents('data.txt'));

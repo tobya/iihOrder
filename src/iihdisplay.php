@@ -52,7 +52,7 @@ if ($CurrentOrderData == false)
 function GetIIHItems(){
 
   $iihDataTextFile = 'iihitems.data.txt';
-
+  $html = '';
   if (file_exists($iihDataTextFile)){
     $html = file_get_contents($iihDataTextFile);
    } 
