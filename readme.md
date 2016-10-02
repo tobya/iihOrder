@@ -33,7 +33,9 @@ Get Involved
 
 Please submit pull requests or Issues.
 
+
 How to create and load a 'data.txt' file 
+----------------------
 
 Since the data used in this application belongs to Independent Irish Healthfoods and contains sensitive company pricing, you must be a customer to get the data.
 
