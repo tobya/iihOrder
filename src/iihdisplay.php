@@ -411,15 +411,19 @@ $(function () {
 
     $("#btnGenerateEmail").click(function(e){
         var i ;
-        var List = '';
+        var DupList = {};
         var Items = [];
         for (i = 0; i < data.length ; i++)
         {
-            if (data[i].Quantity > 0){
 
-            Item = {'Code': data[i].Code, 'Quantity' : data[i].Quantity, 'Description': data[i].Description};
-            Items.push(Item);
-            }
+            if (data[i].Quantity > 0){
+              //Prevent duplicate from being put in email.
+              if (DupList[data[i].Code] == undefined){
+                Item = {'Code': data[i].Code, 'Quantity' : data[i].Quantity, 'Description': data[i].Description};
+                Items.push(Item);
+                DupList[data[i].Code] = 1; 
+              }
+            }            
 
         }
         $.post('postdata.php',{'action':'GenerateMail','items':Items , 'AccountInfo': IIH.AccountInfo},function(data){
