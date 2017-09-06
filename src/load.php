@@ -56,6 +56,14 @@ include('config.php');
         //This looks for a IIH code in the line.
         if  (preg_match('/([\\d]{5}?[A,B\\d])(.*)/i', $line, $regs)) {
 
+		
+		// REGEXBUDDY ([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2}.{0,1}){0,1}([\d]{1,3}\.[\d]{2})
+		// Regex to match single line numbers and pull out three numbers in it.
+		// if (preg_match('/([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2}.{0,1}){0,1}([\d]{1,3}\.[\d]{2})/', $subject, $regs)) {
+		//	$result = $regs[1];
+
+		
+		
               $Desc = $regs[2];
 
            
