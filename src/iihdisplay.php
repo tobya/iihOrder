@@ -232,7 +232,11 @@ var columns = [
     {id: "AutoItemID", name: "AutoItemID", field: "id", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
     {id: "Quantity", name: "Quantity", field: "Quantity", width: 60, minWidth: 30, cssClass: "cell-title", sortable: true, editable:true , editor: Slick.Editors.Integer},
     {id: "Code", name: "Code", field: "Code", width: 60, minWidth: 30, cssClass: "cell-title", sortable: true},
-    {id: "Description", name: "Description", field: "Description", width:560, minWidth: 30, cssClass: "cell-title", sortable: true},
+    {id: "Description", name: "Description", field: "Description", width:400, minWidth: 30, cssClass: "cell-title", sortable: true},
+    {id: "Measure", name:"Measure", field: "Measure", width: 60, minWidth:30, cssClass: "cell-title", sortable : true },
+    {id: "Wholesale", name:"Wholesale", field: "Wholesale", width: 60, minWidth:30, cssClass: "cell-title", sortable : true },
+    {id: "RRP", name:"RRP", field: "RRP", width: 30, minWidth:60, cssClass: "cell-title", sortable : true },
+    {id: "VAT", name:"VAT", field: "VAT", width: 30, minWidth:60, cssClass: "cell-title", sortable : true },
     {id: "Section", name: "Section", field: "Section", width: 160, minWidth: 30, cssClass: "cell-title", sortable: true},
 ];
 

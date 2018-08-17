@@ -54,15 +54,36 @@ include('config.php');
 
         //Match the full line.
         //This looks for a IIH code in the line.
-        if  (preg_match('/([\\d]{5}?[A,B\\d])(.*)/i', $line, $regs)) {
+       // if  (preg_match('/([\\d]{5}?[A,B\\d])(.*)/i', $line, $regs)) {
+       
+
+        if (preg_match('/([\d]{5}?[A,B\d])(.*)([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2}.{0,1}){0,1}([\d]{1,3}\.[\d]{2})/', $line, $regs)) {
+
 
               $Desc = $regs[2];
-
+             // if  (preg_match('/([\\d]{5}?[A,B\\d])(.*)/i', $line, $Xreg)) {
+             //   $fullDesc = $Xreg[2];
+             // }
            
-              $ItemArray[] = array('Code' => $regs[1], 'Description' => $Desc, 'Section' => $Header, 'AutoItemID' => $AutoItemID);
-             
-              echo "\n<BR>LOAD LINE: $line";
+                // regexbuddy (\d{1,3}x\d{0,4}\p{Any}{0,2})
+              if (preg_match('/(\d{1,3}x\d{0,4}\p{Any}{0,2})/u', $line, $Xregs)) {
+              $Measure = $Xregs[1];
+              } 
 
+
+              $Item = array('Code' => $regs[1], 'Description' => $Desc . '-- ' . $fullDesc, 'Measure' => $Measure, 'Section' => $Header, 'AutoItemID' => $AutoItemID);
+
+              //try to match prices
+              // RegexBuddy ([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2} {1}){0,1}([\d]{1,3}\.[\d]{2})
+              if (preg_match('/([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2} {1}){0,1}([\d]{1,3}\.[\d]{2})/', $line, $regs)) {
+                    $Item['price_wholesale'] = $regs[1];
+                    $Item['price_vat'] = $regs[2];
+                    $Item['price_rrp'] = $regs[3];
+              } 
+
+              $ItemArray[] = $Item;
+
+              echo "\n<BR>LOAD LINE: $line";
         }
         else  //If not code is found just store line as header, often goes through multiple ignored lines before loading items again. 
               //Most recent header is used.
@@ -109,6 +130,10 @@ d.Code = "' . $item['Code'] . '";
 d.Description = "' . addslashes(trim($item['Description'])) . '";
 d.Quantity = 0;
 d.Section = "' . addslashes(trim($item['Section'])) . '";
+d.Measure = "' . trim($item['Measure']) . '";
+d.Wholesale = ' . trim($item['price_wholesale']) . ';
+d.RRP = ' . trim($item['price_rrp']) . ';
+d.VAT = "' . trim($item['price_vat']) . '";
 data.push(d);';
 
             $html .=  "\n";
