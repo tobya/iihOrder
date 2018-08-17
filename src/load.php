@@ -60,6 +60,7 @@ include('config.php');
         if (preg_match('/([\d]{5}?[A,B\d])(.*)([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2}.{0,1}){0,1}([\d]{1,3}\.[\d]{2})/', $line, $regs)) {
 
 
+
               $Desc = $regs[2];
              // if  (preg_match('/([\\d]{5}?[A,B\\d])(.*)/i', $line, $Xreg)) {
              //   $fullDesc = $Xreg[2];
