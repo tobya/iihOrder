@@ -72,7 +72,7 @@ include('config.php');
               } 
 
 
-              $Item = array('Code' => $regs[1], 'Description' => $Desc . '-- ' . $fullDesc, 'Measure' => $Measure, 'Section' => $Header, 'AutoItemID' => $AutoItemID);
+              $Item = array('Code' => $regs[1], 'Description' => $Desc , 'Measure' => $Measure, 'Section' => $Header, 'AutoItemID' => $AutoItemID);
 
               //try to match prices
               // RegexBuddy ([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2} {1}){0,1}([\d]{1,3}\.[\d]{2})
@@ -81,6 +81,34 @@ include('config.php');
                     $Item['price_vat'] = $regs[2];
                     $Item['price_rrp'] = $regs[3];
               } 
+
+              $ItemArray[] = $Item;
+
+              echo "\n<BR>LOAD LINE: $line";
+        }
+        else  if  (preg_match('/([\\d]{5}?[A,B\\d])(.*)/i', $line, $regs)) { //old match
+   
+
+              $Desc = $regs[2];
+             // if  (preg_match('/([\\d]{5}?[A,B\\d])(.*)/i', $line, $Xreg)) {
+             //   $fullDesc = $Xreg[2];
+             // }
+           
+                // regexbuddy (\d{1,3}x\d{0,4}\p{Any}{0,2})
+              //if (preg_match('/(\d{1,3}x\d{0,4}\p{Any}{0,2})/u', $line, $Xregs)) {
+              $Measure = '0';
+             // } 
+
+
+              $Item = array('Code' => $regs[1], 'Description' => $Desc , 'Measure' => $Measure, 'Section' => $Header, 'AutoItemID' => $AutoItemID);
+
+              //try to match prices
+              // RegexBuddy ([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2} {1}){0,1}([\d]{1,3}\.[\d]{2})
+             // if (preg_match('/([\d]{1,3}\.[\d]{2}).([\d]{1,2}\.{0,1}[\d]{0,2} {1}){0,1}([\d]{1,3}\.[\d]{2})/', $line, $regs)) {
+                    $Item['price_wholesale'] = '0';
+                    $Item['price_vat'] ='0';
+                    $Item['price_rrp'] = '0';
+             // } 
 
               $ItemArray[] = $Item;
 
